@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TableEnterprise from "./components/TableEnterprise";
 import Home from "./components/Home";
 import AddEnterprise from "./components/AddEnterprise";
+import DeleteEnterprise from "./components/DeleteEnterprise";
 
 class App extends Component {
   render() {
@@ -13,7 +14,7 @@ class App extends Component {
         <header className="App-header">
           <Router>
             <Switch>
-              <Route exact path="/" component={TableEnterprise} />
+              <Route exact path="/" component={DeleteEnterprise} />
               <Route path="/home" component={Home} />
               <Route path="/addEnterprise" component={AddEnterprise} />
             </Switch>

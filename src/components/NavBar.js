@@ -15,7 +15,12 @@ export default function NavBar() {
             </li>
             <li class="nav-item">
               <Link className="nav-link" to="/addEnterprise">
-                Crear Empresa
+                Crear
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link className="nav-link" to="/deleteEnterprise">
+                Editar
               </Link>
             </li>
           </ul>

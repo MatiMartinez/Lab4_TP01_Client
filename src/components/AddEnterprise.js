@@ -14,9 +14,29 @@ export default class AddEnterprise extends Component {
       latitude: "",
       longitude: "",
       adress: "",
-      email: ""
+      email: "",
+      edit: false,
+      id: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      this.setState({
+        edit: true,
+        id: this.props.match.params.id,
+        designation: this.props.match.params.designation,
+        phone: this.props.match.params.phone,
+        attention_time: this.props.match.params.attention_time,
+        about_us: this.props.match.params.about_us,
+        latitude: this.props.match.params.latitude,
+        longitude: this.props.match.params.longitude,
+        adress: this.props.match.params.adress,
+        email: this.props.match.params.email
+      });
+    }
+    this.setState({ designation: this.props.match.params });
   }
 
   handleInputChange(evt) {
@@ -27,9 +47,30 @@ export default class AddEnterprise extends Component {
   }
 
   onSubmit = async evt => {
-    evt.preventDefault();
-    await Axios.post("http://localhost:9001/api/v1/enterprises/", this.state);
-    console.log(this.state);
+    const newEnterprise = {
+      designation: this.state.designation,
+      phone: this.state.phone,
+      attention_time: this.state.attention_time,
+      about_us: this.state.about_us,
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      adress: this.state.adress,
+      email: this.state.email
+    };
+    if (this.state.edit) {
+      evt.preventDefault();
+      await Axios.put(
+        "http://localhost:9001/api/v1/enterprises/" + this.state.id,
+        newEnterprise
+      );
+    } else {
+      evt.preventDefault();
+      await Axios.post(
+        "http://localhost:9001/api/v1/enterprises/",
+        newEnterprise
+      );
+    }
+    window.location.href = "/";
   };
 
   render() {

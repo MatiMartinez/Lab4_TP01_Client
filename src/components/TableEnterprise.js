@@ -12,9 +12,9 @@ export default class TableEnterprise extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:9001/api/v1/enterprises") //URL https://jsonplaceholder.typicode.com/posts
+  getEnterprises = async () => {
+    await axios
+      .get("http://localhost:9001/api/v1/enterprises/")
       .then(response => {
         console.log(response);
         this.setState({ enterprises: response.data });
@@ -22,12 +22,11 @@ export default class TableEnterprise extends Component {
       .catch(error => {
         console.log(error);
       });
-  }
-
-  deleteEnterprise = async id => {
-    console.log(id);
-    await axios.delete("http://localhost:9001/api/v1/enterprises" + id);
   };
+
+  componentDidMount() {
+    this.getEnterprises();
+  }
 
   render() {
     return (
@@ -55,7 +54,6 @@ export default class TableEnterprise extends Component {
                           id: enterprise.id
                         }
                       }}
-                      onDoubleClick={() => this.deleteEnterprise(enterprise.id)}
                     >
                       Web
                     </Link>
