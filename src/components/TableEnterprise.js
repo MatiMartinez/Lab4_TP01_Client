@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
+import NavBar from "./NavBar";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default class TableEnterprise extends Component {
   constructor() {
@@ -23,10 +24,16 @@ export default class TableEnterprise extends Component {
       });
   }
 
+  deleteEnterprise = async id => {
+    console.log(id);
+    await axios.delete("http://localhost:9001/api/v1/enterprises" + id);
+  };
+
   render() {
     return (
       <div>
-        <div className="container">
+        <NavBar />
+        <div className="container pt-4">
           <table width="50%" align="center">
             <thead>
               <tr>
@@ -48,6 +55,7 @@ export default class TableEnterprise extends Component {
                           id: enterprise.id
                         }
                       }}
+                      onDoubleClick={() => this.deleteEnterprise(enterprise.id)}
                     >
                       Web
                     </Link>

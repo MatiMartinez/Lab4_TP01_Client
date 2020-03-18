@@ -13,9 +13,9 @@ class App extends Component {
         <header className="App-header">
           <Router>
             <Switch>
-              <Route exact path="/" component={AddEnterprise} />
+              <Route exact path="/" component={TableEnterprise} />
               <Route path="/home" component={Home} />
-              <Route path="/tableEnterprise" component={TableEnterprise} />
+              <Route path="/addEnterprise" component={AddEnterprise} />
             </Switch>
           </Router>
         </header>

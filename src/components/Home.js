@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
+//import gmap_marker from "../images/gmap_marker.png";
+//import gmap_marker_active from "../images/gmap_marker_active.png";
+
 import "../css/camera.css";
 import "../css/search.css";
 import "../css/google-map.css";
-import "../";
+import "../css/bootstrap.css";
 import axios from "axios";
 
 export default class Home extends Component {
@@ -48,6 +51,7 @@ export default class Home extends Component {
                 <a href="callto:#"> {this.state.enterprise.phone} </a>
                 <small>
                   <span>Horario:</span> 6am-4pm PST M-Th; &nbsp;6am-3pm PST Fri
+                  {this.state.enterprise.attention_time}
                 </small>
               </div>
             </div>
@@ -132,7 +136,7 @@ export default class Home extends Component {
                 <div className="row">
                   <div className="col">
                     <p className="quienesSomos">
-                      {this.state.enterprise.title}
+                      {this.state.enterprise.about_us}
                     </p>
                   </div>
                 </div>
@@ -160,23 +164,31 @@ export default class Home extends Component {
                 >
                   <div className="location">
                     <h3 className="txt-clr1">
-                      <small>Denominación Empresa</small>
+                      <small> {this.state.enterprise.designation} </small>{" "}
+                      {/* Denominacion */}
                     </h3>
                     <address>
                       <dl>
                         <dt>Telefono: </dt>
                         <dd className="phone">
-                          <a href="callto:#"> 800-2345-6789</a>
+                          <a href="callto:#"> {this.state.enterprise.phone} </a>
+                          {/* Telefono */}
                         </dd>
                       </dl>
                       <dl>
                         <dt>Domicilio: </dt>
-                        <dd> 4578 Marmora Road,Glasgow D04 89GR</dd>
+                        <dd>
+                          {/* Domicilio */}
+                          {this.state.enterprise.adress}
+                        </dd>
                       </dl>
                       <dl>
                         <dt> E-mail: </dt>
                         <dd>
-                          <a href="mailto:#">info@demolink.org</a>
+                          <a href="mailto:#">
+                            {/* Email */}
+                            {this.state.enterprise.email}
+                          </a>
                         </dd>
                       </dl>
                     </address>
@@ -188,7 +200,9 @@ export default class Home extends Component {
             <section className="well1">
               <div className="container">
                 <p className="rights">
-                  Denominación Empresa &#169; <span id="copyright-year"></span>
+                  {/* Denominacion */}
+                  {this.state.enterprise.designation} &#169;{" "}
+                  <span id="copyright-year"></span>
                   <a href="index-5.html">Privacy Policy</a>
                 </p>
               </div>
