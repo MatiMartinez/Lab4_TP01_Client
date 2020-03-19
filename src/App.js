@@ -10,17 +10,19 @@ import DeleteEnterprise from "./components/DeleteEnterprise";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Router>
+      <Router>
+        <div className="App">
+          <header className="App-header">
             <Switch>
-              <Route exact path="/" component={DeleteEnterprise} />
+              <Route exact path="/" component={TableEnterprise} />
               <Route path="/home" component={Home} />
               <Route path="/addEnterprise" component={AddEnterprise} />
+              <Route path="/deleteEnterprise" component={DeleteEnterprise} />
+              <Route path="/editEnterprise/:id" component={AddEnterprise} />
             </Switch>
-          </Router>
-        </header>
-      </div>
+          </header>
+        </div>
+      </Router>
     );
   }
 }

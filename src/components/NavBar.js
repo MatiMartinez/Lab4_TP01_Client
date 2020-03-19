@@ -13,12 +13,12 @@ export default function NavBar() {
                 Home
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link className="nav-link" to="/addEnterprise">
                 Crear
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link className="nav-link" to="/deleteEnterprise">
                 Editar
               </Link>

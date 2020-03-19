@@ -13,40 +13,43 @@ export default class AddEnterprise extends Component {
       about_us: "",
       latitude: "",
       longitude: "",
-      adress: "",
+      address: "",
       email: "",
       edit: false,
-      id: ""
+      _id: ""
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    console.log(this.props.match.params.id);
     if (this.props.match.params.id) {
+      const res = await Axios.get(
+        "http://localhost:9001/api/v1/enterprises/" + this.props.match.params.id
+      );
       this.setState({
+        designation: res.data.designation,
+        phone: res.data.phone,
+        attention_time: res.data.attention_time,
+        about_us: res.data.about_us,
+        latitude: res.data.latitude,
+        longitude: res.data.longitude,
+        address: res.data.address,
+        email: res.data.email,
         edit: true,
-        id: this.props.match.params.id,
-        designation: this.props.match.params.designation,
-        phone: this.props.match.params.phone,
-        attention_time: this.props.match.params.attention_time,
-        about_us: this.props.match.params.about_us,
-        latitude: this.props.match.params.latitude,
-        longitude: this.props.match.params.longitude,
-        adress: this.props.match.params.adress,
-        email: this.props.match.params.email
+        _id: this.props.match.params.id
       });
+      console.log(this.state);
     }
-    this.setState({ designation: this.props.match.params });
   }
 
-  handleInputChange(evt) {
+  handleInputChange = evt => {
     this.setState({
       [evt.target.name]: evt.target.value
     });
-    console.log(evt.target.value);
-  }
+  };
 
   onSubmit = async evt => {
+    evt.preventDefault();
     const newEnterprise = {
       designation: this.state.designation,
       phone: this.state.phone,
@@ -54,17 +57,15 @@ export default class AddEnterprise extends Component {
       about_us: this.state.about_us,
       latitude: this.state.latitude,
       longitude: this.state.longitude,
-      adress: this.state.adress,
+      address: this.state.address,
       email: this.state.email
     };
     if (this.state.edit) {
-      evt.preventDefault();
       await Axios.put(
-        "http://localhost:9001/api/v1/enterprises/" + this.state.id,
+        "http://localhost:9001/api/v1/enterprises/" + this.state._id,
         newEnterprise
       );
     } else {
-      evt.preventDefault();
       await Axios.post(
         "http://localhost:9001/api/v1/enterprises/",
         newEnterprise
@@ -87,7 +88,7 @@ export default class AddEnterprise extends Component {
               type="text"
               name="designation"
               onChange={this.handleInputChange}
-              value={this.state.designation}
+              value={this.state.designation || ""}
             />
             <label className="col-form-label col-form-label-sm">Teléfono</label>
             <input
@@ -95,7 +96,7 @@ export default class AddEnterprise extends Component {
               type="text"
               name="phone"
               onChange={this.handleInputChange}
-              value={this.state.phone}
+              value={this.state.phone || ""}
             />
             <label className="col-form-label col-form-label-sm">
               Horarios de Atención
@@ -105,7 +106,7 @@ export default class AddEnterprise extends Component {
               type="text"
               name="attention_time"
               onChange={this.handleInputChange}
-              value={this.state.attention_time}
+              value={this.state.attention_time || ""}
             />
             <label className="col-form-label col-form-label-sm">
               Quienes Somos
@@ -115,7 +116,7 @@ export default class AddEnterprise extends Component {
               type="text"
               name="about_us"
               onChange={this.handleInputChange}
-              value={this.state.about_us}
+              value={this.state.about_us || ""}
             />
             <label className="col-form-label col-form-label-sm">Latitud</label>
             <input
@@ -123,7 +124,7 @@ export default class AddEnterprise extends Component {
               type="number"
               name="latitude"
               onChange={this.handleInputChange}
-              value={this.state.latitude}
+              value={this.state.latitude || ""}
             />
             <label className="col-form-label col-form-label-sm">Longitud</label>
             <input
@@ -131,7 +132,7 @@ export default class AddEnterprise extends Component {
               type="number"
               name="longitude"
               onChange={this.handleInputChange}
-              value={this.state.longitude}
+              value={this.state.longitude || ""}
             />
             <label className="col-form-label col-form-label-sm">
               Domicilio
@@ -139,9 +140,9 @@ export default class AddEnterprise extends Component {
             <input
               className="form-control form-control-sm"
               type="text"
-              name="adress"
+              name="address"
               onChange={this.handleInputChange}
-              value={this.state.adress}
+              value={this.state.address || ""}
             />
             <label className="col-form-label col-form-label-sm">E-mail</label>
             <input
@@ -149,7 +150,7 @@ export default class AddEnterprise extends Component {
               type="email"
               name="email"
               onChange={this.handleInputChange}
-              value={this.state.email}
+              value={this.state.email || ""}
             />
             <div className="d-flex justify-content-around pt-4">
               <Link to="/" className="btn btn-secondary w-100 m-1">

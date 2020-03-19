@@ -29,7 +29,8 @@ export default class DeleteEnterprise extends Component {
   }
 
   deleteEnterprise = async id => {
-    await axios.delete("http://localhost:9001/api/v1/enterprises/");
+    console.log(id);
+    await axios.delete("http://localhost:9001/api/v1/enterprises/" + id);
     this.getEnterprises();
   };
 
@@ -37,13 +38,13 @@ export default class DeleteEnterprise extends Component {
     return (
       <div>
         <NavBar />
-        <div className="row">
+        <div className="container row">
           {this.state.enterprises.map(enterprise => (
             <div className="col-md-4 p-2" key={enterprise.id}>
               <div className="card mb-3">
                 <h3 className="card-header"> {enterprise.designation} </h3>
                 <div className="card-body">
-                  <h5 className="card-title"> {enterprise.adress} </h5>
+                  <h5 className="card-title"> {enterprise.address} </h5>
                   <h6 className="card-subtitle text-muted">
                     {enterprise.phone}
                   </h6>
@@ -56,7 +57,7 @@ export default class DeleteEnterprise extends Component {
                     {enterprise.email}
                   </a>
                 </div>
-                <div className="card-footer">
+                <div className="card-footer d-flex justify-content-around pt-4">
                   <button
                     className="btn btn-danger"
                     onClick={() => this.deleteEnterprise(enterprise.id)}
@@ -64,13 +65,8 @@ export default class DeleteEnterprise extends Component {
                     Eliminar
                   </button>
                   <Link
-                    to={
-                      "/addEnterprise/" +
-                      enterprise.id +
-                      enterprise.designation +
-                      enterprise.phone
-                    }
-                    className="btn btn-secundary"
+                    to={"/editEnterprise/" + enterprise.id}
+                    className="btn btn-secondary"
                   >
                     Editar
                   </Link>

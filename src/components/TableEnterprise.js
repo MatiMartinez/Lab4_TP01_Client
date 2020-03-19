@@ -55,7 +55,7 @@ export default class TableEnterprise extends Component {
                         }
                       }}
                     >
-                      Web
+                      http://www.{enterprise.designation}.com
                     </Link>
                   </td>
                 </tr>
