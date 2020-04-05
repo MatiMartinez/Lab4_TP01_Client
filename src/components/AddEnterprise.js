@@ -21,7 +21,6 @@ export default class AddEnterprise extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.match.params.id);
     if (this.props.match.params.id) {
       const res = await Axios.get(
         "http://localhost:9001/api/v1/enterprises/" + this.props.match.params.id
@@ -38,7 +37,6 @@ export default class AddEnterprise extends Component {
         edit: true,
         _id: this.props.match.params.id
       });
-      console.log(this.state);
     }
   }
 

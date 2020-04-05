@@ -16,7 +16,6 @@ export default class DeleteEnterprise extends Component {
     await axios
       .get("http://localhost:9001/api/v1/enterprises/")
       .then(response => {
-        console.log(response);
         this.setState({ enterprises: response.data });
       })
       .catch(error => {
@@ -29,7 +28,6 @@ export default class DeleteEnterprise extends Component {
   }
 
   deleteEnterprise = async id => {
-    console.log(id);
     await axios.delete("http://localhost:9001/api/v1/enterprises/" + id);
     this.getEnterprises();
   };

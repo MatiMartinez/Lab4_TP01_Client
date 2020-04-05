@@ -6,6 +6,7 @@ import TableEnterprise from "./components/TableEnterprise";
 import Home from "./components/Home";
 import AddEnterprise from "./components/AddEnterprise";
 import DeleteEnterprise from "./components/DeleteEnterprise";
+import AddNotice from "./components/AddNotice";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
               <Route path="/addEnterprise" component={AddEnterprise} />
               <Route path="/deleteEnterprise" component={DeleteEnterprise} />
               <Route path="/editEnterprise/:id" component={AddEnterprise} />
+              <Route path="/addNotice" component={AddNotice} />
             </Switch>
           </header>
         </div>
